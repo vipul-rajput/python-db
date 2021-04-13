@@ -83,8 +83,36 @@ def insert_product_list(product_list):
     finally:
         if conn is not None:
             conn.close()
+def add_order( order_by_name, order_quantity, order_product_id, order_total_price):
+    """ insert a new order into the orders table """
+    sql = """INSERT INTO orders(  order_by_name, order_quantity, order_product_id, order_total_price)
+             VALUES ( %s, %s, %s, %s) RETURNING order_ID;"""
+    conn = None
+    order_id = None
+    try:
+        # read database configuration
+        params = config()
+        # connect to the PostgreSQL database
+        conn = psycopg2.connect(**params)
+        # create a new cursor
+        cur = conn.cursor()
+        # execute the INSERT statement
+        cur.execute(sql, ( order_by_name, order_quantity, order_product_id, order_total_price))
+        # get the generated id back
+        product_id = cur.fetchone()[0]
+        # commit the changes to the database
+        conn.commit()
+        # close communication with the database
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+    return order_id
 
 if __name__ == '__main__':
     # insert one product
-    insert_product(product_name='hair oil', category_ID=1, product_price = 44)
+     
+    add_order( order_by_name='kp', order_quantity=1, order_product_id=1, order_total_price=290)
  

@@ -24,14 +24,15 @@ def create_tables():
             foreign key (category_ID) references categories(category_ID) on delete set null);
         """,
      """  CREATE TABLE orders(
-           order_ID int not null,
-           order_date_time timestamp not null,
+           order_ID int GENERATED ALWAYS AS IDENTITY,
+           order_date_time timestamp default current_timestamp,
            order_by_name VARCHAR(255) not null,
            order_quantity int not null,
            order_product_id int not null,
            order_total_price int not null,
            foreign key(order_product_id) references products(product_ID) on delete set null,
            primary key(order_ID));
+
        """
         )
     conn = None
