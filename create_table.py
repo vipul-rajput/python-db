@@ -21,7 +21,7 @@ def create_tables():
             category_ID int not null,
             product_price INT ,
             primary key (product_id),
-            foreign key (category_ID) references categories(category_ID) on delete set null);
+            foreign key (category_ID) references categories(category_ID) on delete cascade);
         """,
      """  CREATE TABLE orders(
            order_ID int GENERATED ALWAYS AS IDENTITY,
@@ -30,7 +30,7 @@ def create_tables():
            order_quantity int not null,
            order_product_id int not null,
            order_total_price int not null,
-           foreign key(order_product_id) references products(product_ID) on delete set null,
+           foreign key(order_product_id) references products(product_ID) on delete cascade,
            primary key(order_ID));
 
        """

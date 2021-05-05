@@ -1,17 +1,30 @@
-import psycopg2
-from config import config
-from insert import insert_category, insert_product
+# 
+from display import *
+from tkinter import *
 
-print("*********Jio Stores*********")
-
-print("Select the Option")
-ch = int(input("1. Insert Category\n2. Insert Product\n"))
-if ch==1:
-    temp_cat = input("Enter Category")
-    insert_category(temp_cat)
-if ch==2:
-    temp_prod_cat = int(input("Enter Category Id in which you want to insert: "))
-    temp_prod_name = input("Enter Product Name: ")
-    temp_prod_price = int(input("Enter Product Price: "))
-    insert_product(product_name= temp_prod_name, category_ID= temp_prod_cat, product_price= temp_prod_price)
-    # insert_product(temp_prod_name, temp_prod_price, temp_prod_cat)
+class Table:
+      
+    def __init__(self,root):
+          
+        # code for creating table
+        for i in range(total_rows):
+            for j in range(total_columns):
+                  
+                self.e = Entry(root, width=20, fg='black',
+                               font=('Arial',16,'bold'))
+                  
+                self.e.grid(row=i, column=j)
+                self.e.insert(END, lst[i][j])
+  
+# take the data
+lst = get_products()
+print(lst)  
+# find total number of rows and
+# columns in list
+total_rows = len(lst)
+total_columns = len(lst[0])
+   
+# create root window
+root = Tk()
+t = Table(root)
+root.mainloop()

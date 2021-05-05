@@ -112,7 +112,4 @@ def add_order( order_by_name, order_quantity, order_product_id, order_total_pric
     return order_id
 
 if __name__ == '__main__':
-    # insert one product
-     
-    add_order( order_by_name='kp', order_quantity=1, order_product_id=1, order_total_price=290)
- 
+    add_order(input('Customer Name : '), int(input('Order quantity : ')), int(input('Order Product Id : ')), int(input('Total Price :')))
