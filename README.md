@@ -1,2 +1,2 @@
-# python-db
-#### Connecting PostgresSQL with python
+# Retail Sore Management 
+#### PostgreSQL connected with Python
